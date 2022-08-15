@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Menu from './Menu'
 import Start from './Start'
-import left from './assets/left.png'
-import right from './assets/right.png'
+import blob1 from './assets/blob1.svg'
+import blob2 from './assets/blob2.svg'
 
 function App() {
+  const [started, setStarted] = useState(false)
+
   return (
     <div className='main-container'>
-      <img className='left-img' src={left} alt="left image" />
-      <img className='right-img' src={right} alt="right image" />
-      <Menu />
-      <Start />
+      <img src={blob1} alt="" />
+      <img src={blob2} alt="" />  
+      { started ? <Start /> : <Menu />}
     </div>
     
   )
