@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div className='main-container'>
-      <img src={blob1} alt="" />
-      <img src={blob2} alt="" />  
+      <div className='blob'></div>
+      <img className='left' src={blob1} alt="" />
       { started ? <Start /> : <Menu />}
     </div>
     
