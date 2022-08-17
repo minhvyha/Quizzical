@@ -6,10 +6,22 @@ import blob1 from './assets/blob1.svg'
 function App() {
   const [started, setStarted] = useState(false)
 
+  function start(){
+    setStarted(x => !x)
+    console.log(started)
+  }
+
   return (
     <div className='main-container'>
       <div className='content-container'>
-        { started ? <Start /> : <Menu />}
+        { started ? 
+         <Start 
+          
+         /> 
+         : 
+         <Menu 
+         start={start}
+         />}
       </div>
       
       <div className='blob1'>
