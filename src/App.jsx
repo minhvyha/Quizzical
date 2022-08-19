@@ -33,8 +33,9 @@ function App() {
     <div className='main-container'>
       <div className='content-container'>
         { started ? 
-         <div>
-          {questionElement}
+         <div className='start-content-container'>
+            {questionElement}
+          <button className='check'>Check Answer</button>
          </div>
          : 
          <Menu 
