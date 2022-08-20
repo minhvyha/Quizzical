@@ -9,7 +9,7 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0)
 
-
+  const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
   useEffect(() => {
 
     async function getQuestion() {
@@ -17,7 +17,7 @@ function App() {
       const data = await res.json()
       let q = []
       data.results.forEach(question =>{
-        q.push({id: nanoid(), answers:[...question.incorrect_answers, question.correct_answer], question:question.question, correct:question.correct_answer, selected: null})
+        q.push({id: nanoid(), answers:shuffleArray([...question.incorrect_answers, question.correct_answer]), question:question.question, correct:question.correct_answer, selected: null})
       })
       setQuestions(q)
   }
