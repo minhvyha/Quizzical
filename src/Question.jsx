@@ -11,9 +11,22 @@ function Question(props) {
     props.handleClickAnswer(props.id, answer)
   }
 
-
   const answersElement = answers.map(answer =>{
-    return <button key={nanoid()} className={answer === props.q.selected ? 'answer selected' : 'answer'} onClick={() => handleClick(answer)}>{atob(answer)}</button>
+    let id = null
+    if (props.q.checked){
+      if (props.q.correct === answer){
+        id = 'correct'
+      }
+      else if(props.q.selected === answer){
+        id = 'incorrect'
+      }
+      else{
+        id = 'not-selected'
+      }
+    }
+    return (
+    <button key={nanoid()} id={id} className={answer === props.q.selected ? 'answer selected' : 'answer'} onClick={() => handleClick(answer)}>{atob(answer)}</button>
+    )
   })
 
 

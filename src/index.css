@@ -82,6 +82,19 @@ body{
     align-items: center;
     flex-direction: column;
 }
+.end-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: .2rem;
+}
+.score{
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 1rem;
+}
 /* =========== QUESTION =========== */
 
 .content-container{
@@ -116,4 +129,17 @@ body{
 }
 .selected{
     background-color: #D6DBF5;
+}
+
+#correct.answer{
+    background-color: #94D7A2;
+    border: 1px solid #94D7A2;
+}
+#incorrect.answer.selected{
+    background-color: #F8BCBC;
+    border: 1px solid #F8BCBC;
+}
+#not-selected.answer{
+    color: rgba(41, 50, 100, .4);
+    border: 1px solid rgba(41, 50, 100, .4);
 }

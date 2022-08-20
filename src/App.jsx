@@ -9,6 +9,7 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0)
   const [checked, setChecked] = useState(false)
+  const [correct, setCorrect] = useState(0)
 
 
   const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
@@ -27,12 +28,29 @@ function App() {
   }, [count])
 
   function handleCheck(){
+    let selected = true
+    questions.forEach(question =>{
+      if (question.selected === null){
+        selected = false
+        return
+      }
+    })
+    if (!selected){
+      return
+    }
     setQuestions(questions => questions.map(question => {
+      
       return {...question, checked:true}
     }))
     setChecked(true)
+    let correct = 0
+    questions.forEach(question =>{
+      if (question.correct === question.selected){
+        correct += 1
+      }
+    })
+    setCorrect(correct)
   }
-
   function handleClickAnswer(id, answer) {
     setQuestions(questions => questions.map(question =>{
       return question.id === id ? {...question, selected: answer} : question
@@ -40,10 +58,9 @@ function App() {
   }
 
   function handlePlayAgain(){
-    setQuestions(questions => questions.map(question => {
-      return {...question, checked:false}
-    }))
+    setCount(count => count + 1)
     setChecked(false)
+
   }
 
    const questionElement = questions ? questions.map(question =>{
@@ -67,8 +84,11 @@ function App() {
         { started ? 
          <div className='start-content-container'>
             {questionElement}
+          <div className='end-div'>
+          {checked && <span className='score'>You scored {correct}/5 correct answers</span>}
           <button className='check' onClick={checked ? handlePlayAgain : handleCheck}>{checked ? 'Play Again' : 'Check Answer'}</button>
          </div>
+        </div>
          : 
          <Menu 
          start={start}
