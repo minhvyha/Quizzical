@@ -5,6 +5,9 @@ function Question(props) {
   let answers = props.q.answers
 
   function handleClick(answer){
+    if (props.q.checked){
+      return
+    }
     props.handleClickAnswer(props.id, answer)
   }
 

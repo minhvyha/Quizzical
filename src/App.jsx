@@ -8,30 +8,43 @@ function App() {
   const [started, setStarted] = useState(false)
   const [questions, setQuestions] = useState([]);
   const [count, setCount] = useState(0)
+  const [checked, setChecked] = useState(false)
+
 
   const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
-  useEffect(() => {
 
+  useEffect(() => {
     async function getQuestion() {
       const res = await fetch("https://opentdb.com/api.php?amount=5&category=18&encode=base64")
       const data = await res.json()
       let q = []
       data.results.forEach(question =>{
-        q.push({id: nanoid(), answers:shuffleArray([...question.incorrect_answers, question.correct_answer]), question:question.question, correct:question.correct_answer, selected: null})
+        q.push({id: nanoid(), answers:shuffleArray([...question.incorrect_answers, question.correct_answer]), question:question.question, correct:question.correct_answer, selected: null, checked:false})
       })
       setQuestions(q)
   }
     getQuestion()
   }, [count])
 
+  function handleCheck(){
+    setQuestions(questions => questions.map(question => {
+      return {...question, checked:true}
+    }))
+    setChecked(true)
+  }
 
   function handleClickAnswer(id, answer) {
     setQuestions(questions => questions.map(question =>{
       return question.id === id ? {...question, selected: answer} : question
     }))
-    console.log('loop')
   }
-  console.log(questions)
+
+  function handlePlayAgain(){
+    setQuestions(questions => questions.map(question => {
+      return {...question, checked:false}
+    }))
+    setChecked(false)
+  }
 
    const questionElement = questions ? questions.map(question =>{
     return(
@@ -54,7 +67,7 @@ function App() {
         { started ? 
          <div className='start-content-container'>
             {questionElement}
-          <button className='check'>Check Answer</button>
+          <button className='check' onClick={checked ? handlePlayAgain : handleCheck}>{checked ? 'Play Again' : 'Check Answer'}</button>
          </div>
          : 
          <Menu 
