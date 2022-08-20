@@ -95,7 +95,7 @@ body{
 }
 
 .question-title{
-    font-size: .9rem;
+    font-size: .8rem;
     color: rgba(41, 50, 100, 1);
     margin-bottom: .5rem;
 }
@@ -103,7 +103,7 @@ body{
     color: rgba(41, 50, 100, 1);
     background-color: transparent;
     border: 1px solid #4D5B9E;
-    font-size: .7rem;
+    font-size: .6rem;
     border-radius: .3rem;
     margin-right: .6rem;
     margin-bottom: .2rem;
@@ -113,4 +113,7 @@ body{
     margin-top: .5rem;
     width: 100%;
     border-top: 0.794239px solid #c4c8e0;
+}
+.selected{
+    background-color: #D6DBF5;
 }

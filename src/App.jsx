@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Menu from './Menu'
 import blob1 from './assets/blob1.svg'
 import Question from './Question'
+import { nanoid } from 'nanoid'
 
 function App() {
   const [started, setStarted] = useState(false)
@@ -10,20 +11,38 @@ function App() {
 
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=18&encode=base64")
-            .then(res => res.json())
-            .then(data => setQuestions(data.results));
+
+    async function getQuestion() {
+      const res = await fetch("https://opentdb.com/api.php?amount=5&category=18&encode=base64")
+      const data = await res.json()
+      let q = []
+      data.results.forEach(question =>{
+        q.push({id: nanoid(), answers:[...question.incorrect_answers, question.correct_answer], question:question.question, correct:question.correct_answer, selected: null})
+      })
+      setQuestions(q)
+  }
+    getQuestion()
   }, [count])
 
-   let questionElement = questions ? questions.map(question =>{
+
+  function handleClickAnswer(id, answer) {
+    setQuestions(questions => questions.map(question =>{
+      return question.id === id ? {...question, selected: answer} : question
+    }))
+    console.log('loop')
+  }
+  console.log(questions)
+
+   const questionElement = questions ? questions.map(question =>{
     return(
       <Question
+       key={question.id}
        q={question}
+       handleClickAnswer={handleClickAnswer}
+       id={question.id}
       />
     )
    }) : []
-
-   console.log(questions)
 
   function start(){
     setStarted(x => !x)
