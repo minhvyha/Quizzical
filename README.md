@@ -1,7 +1,7 @@
 ![preview img](/preview.png)
 
 # Quizzical
-## [Live Demo](https://tenziesdice.netlify.app/)
+## [Live Demo](https://quizzicalhut.netlify.app/)
 ## [Video Demo](https://youtu.be/aCz5QHt_9u8)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/734e724f-e421-457d-a618-686248325795/deploy-status)](https://app.netlify.com/sites/quizzicalhut/deploys)
 
